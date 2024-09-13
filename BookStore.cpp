@@ -2,53 +2,53 @@
 #include <string>
 using namespace std;
 
-class Book {
+class Book{
 private:
     string title;
     string author;
     int publicationYear;
 
 public:
-    Book(string t, string a, int pYear) {
-        title = t;
-        author = a;
-        publicationYear = pYear;
+    Book(string title, string author, int publicationYear){
+        this->title = title;
+        this->author = author;
+        this->publicationYear = publicationYear;
     }
 
-    void getBookDetails() {
+    void getBookDetails(){
         cout << "Title: " << title << ", Author: " << author << ", Publication Year: " << publicationYear << endl;
     }
 
-    void updatePublicationYear(int newYear) {
+    void updatePublicationYear(int newYear){
         publicationYear = newYear;
         cout << "Updated Publication Year: " << publicationYear << endl;
     }
 };
 
-class BookStore {
+class BookStore{
 private:
     string storeName;
     string location;
     int totalBooksInStock;
 
 public:
-    BookStore(string sName, string loc, int total) {
-        storeName = sName;
-        location = loc;
-        totalBooksInStock = total;
+    BookStore(string storeName, string location, int totalBooksInStock){
+        this->storeName = storeName;
+        this->location = location;
+        this->totalBooksInStock = totalBooksInStock;
     }
 
-    void getStoreDetails() {
+    void getStoreDetails(){
         cout << "Book Store: " << storeName << ", Location: " << location << ", Total Books in Stock: " << totalBooksInStock << endl;
     }
 
-    void updateTotalBooksInStock(int newTotal) {
+    void updateTotalBooksInStock(int newTotal){
         totalBooksInStock = newTotal;
         cout << "Updated Total Books in Stock: " << totalBooksInStock << endl;
     }
 };
 
-int main() {
+int main(){
     Book book1("The Catcher in the Rye", "J.D. Salinger", 1951);
     book1.getBookDetails();
     book1.updatePublicationYear(1952);
