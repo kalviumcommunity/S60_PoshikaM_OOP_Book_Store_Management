@@ -50,7 +50,7 @@ public:
 
 int main(){
     
-    Book books[3] = {
+    Book* books = new Book[3]{
         Book("Ikigai", "Hector Garcia and Francesc Miralles", 2017),
         Book("Atomic Habits", "James Clear", 2018),
         Book("Rich Dad Poor Dad", "Robert T. Kiyosaki and Sharon Lechter", 1997),
@@ -60,7 +60,9 @@ int main(){
         books[i].getBookDetails();
     };
 
-    BookStore stores[3] = {
+    delete[] books;
+
+    BookStore* stores = new BookStore[3]{
         BookStore("Book Haven", "456 Elm St", 5000),
         BookStore("Readers' Corner", "789 Maple Ave", 3500),
         BookStore("Page Turners", "123 Oak Blvd", 4200),
@@ -69,6 +71,8 @@ int main(){
     for (int i = 0; i < 3; i++) {
         stores[i].getStoreDetails();
     };
+
+    delete[] stores;
 
     return 0;
 }
