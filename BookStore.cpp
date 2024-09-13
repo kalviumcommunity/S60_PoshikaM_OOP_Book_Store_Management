@@ -49,13 +49,26 @@ public:
 };
 
 int main(){
-    Book book1("The Catcher in the Rye", "J.D. Salinger", 1951);
-    book1.getBookDetails();
-    book1.updatePublicationYear(1952);
+    
+    Book books[3] = {
+        Book("Ikigai", "Hector Garcia and Francesc Miralles", 2017),
+        Book("Atomic Habits", "James Clear", 2018),
+        Book("Rich Dad Poor Dad", "Robert T. Kiyosaki and Sharon Lechter", 1997),
+    };
 
-    BookStore store1("Book Haven", "456 Elm St", 5000);
-    store1.getStoreDetails();
-    store1.updateTotalBooksInStock(5200);
+    for (int i = 0; i < 3; i++) {
+        books[i].getBookDetails();
+    };
+
+    BookStore stores[3] = {
+        BookStore("Book Haven", "456 Elm St", 5000),
+        BookStore("Readers' Corner", "789 Maple Ave", 3500),
+        BookStore("Page Turners", "123 Oak Blvd", 4200),
+    };
+
+    for (int i = 0; i < 3; i++) {
+        stores[i].getStoreDetails();
+    };
 
     return 0;
 }
