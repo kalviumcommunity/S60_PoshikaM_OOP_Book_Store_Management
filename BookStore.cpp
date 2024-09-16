@@ -26,6 +26,10 @@ public:
         publicationYear = newYear;
         cout << "Updated Publication Year: " << publicationYear << endl;
     }
+
+    static int getTotalBooks(){
+        return totalBooks;
+    }
 };
 
 int Book::totalBooks = 0;
@@ -54,6 +58,10 @@ public:
         totalBooksInStock = newTotal;
         cout << "Updated Total Books in Stock: " << totalBooksInStock << endl;
     }
+
+    static int getTotalStores(){
+        return totalStores;
+    }
 };
 
 int BookStore::totalStores = 0;
@@ -70,7 +78,7 @@ int main(){
         books[i].getBookDetails();
     };
 
-    cout << "Total Books Created : " << Book::totalBooks << endl;
+    cout << "Total Books Created : " << Book::getTotalBooks() << endl;
 
     delete[] books;
 
@@ -84,7 +92,7 @@ int main(){
         stores[i].getStoreDetails();
     };
 
-    cout << "Total Book Stores Created : " << BookStore::totalStores << endl;
+    cout << "Total Book Stores Created : " << BookStore::getTotalStores() << endl;
 
     delete[] stores;
 
