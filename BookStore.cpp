@@ -9,10 +9,13 @@ private:
     int publicationYear;
 
 public:
+    static int totalBooks;
+
     Book(string title, string author, int publicationYear){
         this->title = title;
         this->author = author;
         this->publicationYear = publicationYear;
+        totalBooks++;
     }
 
     void getBookDetails(){
@@ -25,6 +28,8 @@ public:
     }
 };
 
+int Book::totalBooks = 0;
+
 class BookStore{
 private:
     string storeName;
@@ -32,10 +37,13 @@ private:
     int totalBooksInStock;
 
 public:
+    static int totalStores;
+
     BookStore(string storeName, string location, int totalBooksInStock){
         this->storeName = storeName;
         this->location = location;
         this->totalBooksInStock = totalBooksInStock;
+        totalStores++;
     }
 
     void getStoreDetails(){
@@ -47,6 +55,8 @@ public:
         cout << "Updated Total Books in Stock: " << totalBooksInStock << endl;
     }
 };
+
+int BookStore::totalStores = 0;
 
 int main(){
     
@@ -60,6 +70,8 @@ int main(){
         books[i].getBookDetails();
     };
 
+    cout << "Total Books Created : " << Book::totalBooks << endl;
+
     delete[] books;
 
     BookStore* stores = new BookStore[3]{
@@ -71,6 +83,8 @@ int main(){
     for (int i = 0; i < 3; i++) {
         stores[i].getStoreDetails();
     };
+
+    cout << "Total Book Stores Created : " << BookStore::totalStores << endl;
 
     delete[] stores;
 
