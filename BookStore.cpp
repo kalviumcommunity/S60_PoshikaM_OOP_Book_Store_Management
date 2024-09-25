@@ -11,20 +11,36 @@ private:
 public:
     static int totalBooks;
 
-    Book(string title, string author, int publicationYear){
-        this->title = title;
-        this->author = author;
-        this->publicationYear = publicationYear;
+    Book(){
         totalBooks++;
     }
 
+    void setBookDetails(string title, string author, int publicationYear){
+        this->title = title;
+        this->author = author;
+        this->publicationYear = publicationYear;
+    }
+
+    // Accessors (Getters)
+    string getTitle(){
+        return title;
+    }
+
+    string getAuthor(){
+        return author;
+    }
+
+    int getPublicationYear(){
+        return publicationYear;
+    }
+
     void getBookDetails(){
-        cout << "Title: " << title << ", Author: " << author << ", Publication Year: " << publicationYear << endl;
+        cout << "Title: " << getTitle() << ", Author: " << getAuthor() << ", Publication Year: " << getPublicationYear() << endl;
     }
 
     void updatePublicationYear(int newYear){
         publicationYear = newYear;
-        cout << "Updated Publication Year: " << publicationYear << endl;
+        cout << "Updated Publication Year: " << getPublicationYear() << endl;
     }
 
     static int getTotalBooks(){
@@ -43,20 +59,36 @@ private:
 public:
     static int totalStores;
 
-    BookStore(string storeName, string location, int totalBooksInStock){
-        this->storeName = storeName;
-        this->location = location;
-        this->totalBooksInStock = totalBooksInStock;
+    BookStore(){
         totalStores++;
     }
 
+    void setStoreDetails(string storeName, string location, int totalBooksInStock) {
+        this->storeName = storeName;
+        this->location = location;
+        this->totalBooksInStock = totalBooksInStock;
+    }
+
+    // Accessors (Getters)
+    string getStoreName() {
+        return storeName;
+    }
+
+    string getLocation() {
+        return location;
+    }
+
+    int getTotalBooksInStock() {
+        return totalBooksInStock;
+    }
+
     void getStoreDetails(){
-        cout << "Book Store: " << storeName << ", Location: " << location << ", Total Books in Stock: " << totalBooksInStock << endl;
+        cout << "Book Store: " << getStoreName() << ", Location: " << getLocation() << ", Total Books in Stock: " << getTotalBooksInStock() << endl;
     }
 
     void updateTotalBooksInStock(int newTotal){
         totalBooksInStock = newTotal;
-        cout << "Updated Total Books in Stock: " << totalBooksInStock << endl;
+        cout << "Updated Total Books in Stock: " << getTotalBooksInStock() << endl;
     }
 
     static int getTotalStores(){
@@ -68,11 +100,10 @@ int BookStore::totalStores = 0;
 
 int main(){
     
-    Book* books = new Book[3]{
-        Book("Ikigai", "Hector Garcia and Francesc Miralles", 2017),
-        Book("Atomic Habits", "James Clear", 2018),
-        Book("Rich Dad Poor Dad", "Robert T. Kiyosaki and Sharon Lechter", 1997),
-    };
+    Book books[3];
+    books[0].setBookDetails("Ikigai", "Hector Garcia and Francesc Miralles", 2017);
+    books[1].setBookDetails("Atomic Habits", "James Clear", 2018);
+    books[2].setBookDetails("Rich Dad Poor Dad", "Robert T. Kiyosaki and Sharon Lechter", 1997);
 
     for (int i = 0; i < 3; i++) {
         books[i].getBookDetails();
@@ -80,21 +111,16 @@ int main(){
 
     cout << "Total Books Created : " << Book::getTotalBooks() << endl;
 
-    delete[] books;
-
-    BookStore* stores = new BookStore[3]{
-        BookStore("Book Haven", "456 Elm St", 5000),
-        BookStore("Readers' Corner", "789 Maple Ave", 3500),
-        BookStore("Page Turners", "123 Oak Blvd", 4200),
-    };
+    BookStore stores[3];
+    stores[0].setStoreDetails("Book Haven", "456 Elm St", 5000);
+    stores[1].setStoreDetails("Readers' Corner", "789 Maple Ave", 3500);
+    stores[2].setStoreDetails("Page Turners", "123 Oak Blvd", 4200);
 
     for (int i = 0; i < 3; i++) {
         stores[i].getStoreDetails();
     };
 
     cout << "Total Book Stores Created : " << BookStore::getTotalStores() << endl;
-
-    delete[] stores;
 
     return 0;
 }
