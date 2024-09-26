@@ -12,15 +12,24 @@ private:
 public:
     static int totalBooks;
 
+    // Default constructor
     Book(){
         totalBooks++;
     }
 
-    void setBookDetails(string title, string author, int publicationYear, string genre){
+    // Parameterized constructor
+    Book(string title, string author, int publicationYear, string genre) {
         this->title = title;
         this->author = author;
         this->genre = genre;
         this->publicationYear = publicationYear;
+        totalBooks++;
+    }
+
+    // Destructor
+    ~Book() {
+        totalBooks--;
+        cout << "Book '" << title << "' destroyed." << endl;
     }
 
     // Accessors (Getters)
@@ -66,15 +75,24 @@ private:
 public:
     static int totalStores;
 
+    // Default constructor
     BookStore(){
         totalStores++;
     }
 
-    void setStoreDetails(string storeName, string location, int totalBooksInStock, string owner) {
+    // Parameterized constructor
+    BookStore(string storeName, string location, int totalBooksInStock, string owner) {
         this->storeName = storeName;
         this->location = location;
         this->totalBooksInStock = totalBooksInStock;
         this->owner = owner;
+        totalStores++;
+    }
+
+    // Destructor
+    ~BookStore() {
+        totalStores--;
+        cout << "Book Store '" << storeName << "' destroyed." << endl;
     }
 
     // Accessors (Getters)
@@ -112,21 +130,25 @@ int BookStore::totalStores = 0;
 
 int main(){
     
-    Book books[3];
-    books[0].setBookDetails("Ikigai", "Hector Garcia and Francesc Miralles", 2017, "Self-help");
-    books[1].setBookDetails("Atomic Habits", "James Clear", 2018, "Self-help");
-    books[2].setBookDetails("Rich Dad Poor Dad", "Robert T. Kiyosaki and Sharon Lechter", 1997, "Finance");
+    // Using parameterized constructor
+    Book book[3] = {
+        Book("Ikigai", "Hector Garcia and Francesc Miralles", 2017, "Self-help"),
+        Book("Atomic Habits", "James Clear", 2018, "Self-help"),
+        Book("Rich Dad Poor Dad", "Robert T. Kiyosaki and Sharon Lechter", 1997, "Finance")
+    };
 
     for (int i = 0; i < 3; i++) {
-        books[i].getBookDetails();
+        book[i].getBookDetails();
     };
 
     cout << "Total Books Created : " << Book::getTotalBooks() << endl;
 
-    BookStore stores[3];
-    stores[0].setStoreDetails("Book Haven", "456 Elm St", 5000, "Alice Johnson");
-    stores[1].setStoreDetails("Readers' Corner", "789 Maple Ave", 3500, "Bob Smith");
-    stores[2].setStoreDetails("Page Turners", "123 Oak Blvd", 4200, "Charlie Brown");
+    // Using parameterized constructor
+    BookStore stores[3] = {
+        BookStore("Book Haven", "456 Elm St", 5000, "Alice Johnson"),
+        BookStore("Readers' Corner", "789 Maple Ave", 3500, "Bob Smith"),
+        BookStore("Page Turners", "123 Oak Blvd", 4200, "Charlie Brown")
+    };
 
     for (int i = 0; i < 3; i++) {
         stores[i].getStoreDetails();
