@@ -21,6 +21,9 @@ public:
     string getLocation() {
         return location;
     }
+
+    // Virtual function for displaying details
+    virtual void displayDetails() = 0; // Pure virtual function
 };
 
 class Book : public Entity{
@@ -64,8 +67,11 @@ public:
         return publicationYear;
     }
 
-    void getBookDetails(){
-        cout << "Title: " << getName() << ", Author: " << getAuthor() << ", Publication Year: " << getPublicationYear() << ", Genre: " << getGenre() << endl;
+    // Overriding displayDetails
+    void displayDetails() override {
+        cout << "Title: " << getName() << ", Author: " << getAuthor()
+            << ", Publication Year: " << getPublicationYear()
+            << ", Genre: " << getGenre() << endl;
     }
 
     void updatePublicationYear(int newYear){
@@ -115,8 +121,11 @@ public:
         return owner;
     }
 
-    void getStoreDetails(){
-        cout << "Book Store: " << getName() << ", Location: " << getLocation() << ", Total Books in Stock: " << getTotalBooksInStock() << ", Owner: " << getOwner() << endl;
+    // Overriding displayDetails
+    void displayDetails() override {
+        cout << "Book Store: " << getName() << ", Location: " << getLocation()
+             << ", Total Books in Stock: " << getTotalBooksInStock()
+             << ", Owner: " << getOwner() << endl;
     }
 
     void updateTotalBooksInStock(int newTotal){
@@ -141,7 +150,7 @@ int main(){
     };
 
     for (int i = 0; i < 3; i++) {
-        book[i].getBookDetails();
+        book[i].displayDetails();
     };
 
     cout << "Total Books Created : " << Book::getTotalBooks() << endl;
@@ -154,7 +163,7 @@ int main(){
     };
 
     for (int i = 0; i < 3; i++) {
-        stores[i].getStoreDetails();
+        stores[i].displayDetails();
     };
 
     cout << "Total Book Stores Created : " << BookStore::getTotalStores() << endl;
