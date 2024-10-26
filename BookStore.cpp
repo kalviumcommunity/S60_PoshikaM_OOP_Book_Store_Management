@@ -2,9 +2,29 @@
 #include <string>
 using namespace std;
 
-class Book{
+class Entity{
+protected:
+    string name;
+    string location;
+
+public:
+    Entity() {}
+    Entity(string name, string location){
+        this->name = name;
+        this->location = location;
+    }
+
+    string getName() {
+        return name;
+    }
+
+    string getLocation() {
+        return location;
+    }
+};
+
+class Book : public Entity{
 private:
-    string title;
     string author;
     string genre;
     int publicationYear;
@@ -18,8 +38,7 @@ public:
     }
 
     // Parameterized constructor
-    Book(string title, string author, int publicationYear, string genre) {
-        this->title = title;
+    Book(string title, string author, int publicationYear, string genre) : Entity(title, "") {
         this->author = author;
         this->genre = genre;
         this->publicationYear = publicationYear;
@@ -27,16 +46,12 @@ public:
     }
 
     // Destructor
-    ~Book() {
+    ~Book(){
         totalBooks--;
-        cout << "Book '" << title << "' destroyed." << endl;
+        cout << "Book '" << getName() << "' destroyed." << endl;
     }
 
     // Accessors (Getters)
-    string getTitle(){
-        return title;
-    }
-
     string getAuthor(){
         return author;
     }
@@ -50,7 +65,7 @@ public:
     }
 
     void getBookDetails(){
-        cout << "Title: " << getTitle() << ", Author: " << getAuthor() << ", Publication Year: " << getPublicationYear() << ", Genre: " << getGenre() << endl;
+        cout << "Title: " << getName() << ", Author: " << getAuthor() << ", Publication Year: " << getPublicationYear() << ", Genre: " << getGenre() << endl;
     }
 
     void updatePublicationYear(int newYear){
@@ -65,10 +80,8 @@ public:
 
 int Book::totalBooks = 0;
 
-class BookStore{
+class BookStore : public Entity{
 private:
-    string storeName;
-    string location;
     int totalBooksInStock;
     string owner;
 
@@ -81,9 +94,7 @@ public:
     }
 
     // Parameterized constructor
-    BookStore(string storeName, string location, int totalBooksInStock, string owner) {
-        this->storeName = storeName;
-        this->location = location;
+    BookStore(string storeName, string location, int totalBooksInStock, string owner) : Entity(storeName, location) {
         this->totalBooksInStock = totalBooksInStock;
         this->owner = owner;
         totalStores++;
@@ -92,18 +103,10 @@ public:
     // Destructor
     ~BookStore() {
         totalStores--;
-        cout << "Book Store '" << storeName << "' destroyed." << endl;
+        cout << "Book Store '" << name << "' destroyed." << endl;
     }
 
     // Accessors (Getters)
-    string getStoreName() {
-        return storeName;
-    }
-
-    string getLocation() {
-        return location;
-    }
-
     int getTotalBooksInStock() {
         return totalBooksInStock;
     }
@@ -113,7 +116,7 @@ public:
     }
 
     void getStoreDetails(){
-        cout << "Book Store: " << getStoreName() << ", Location: " << getLocation() << ", Total Books in Stock: " << getTotalBooksInStock() << ", Owner: " << getOwner() << endl;
+        cout << "Book Store: " << getName() << ", Location: " << getLocation() << ", Total Books in Stock: " << getTotalBooksInStock() << ", Owner: " << getOwner() << endl;
     }
 
     void updateTotalBooksInStock(int newTotal){
