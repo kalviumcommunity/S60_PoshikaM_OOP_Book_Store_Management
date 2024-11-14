@@ -161,6 +161,32 @@ void BookStoreDisplay::display(BookStore &store) {
 
 int BookStore::totalStores = 0;
 
+// Extending with a Magazine Class
+class Magazine : public Entity {
+private:
+    int issueNumber;
+    string publisher;
+
+public:
+    Magazine(string title, int issueNumber, string publisher) : Entity(title, "") {
+        this->issueNumber = issueNumber;
+        this->publisher = publisher;
+    }
+
+    int getIssueNumber() {
+        return issueNumber;
+    }
+
+    string getPublisher() {
+        return publisher;
+    }
+
+    void displayDetails() override {
+        cout << "Magazine: " << getName() << ", Issue: " << getIssueNumber()
+             << ", Publisher: " << getPublisher() << endl;
+    }
+};
+
 int main() {
     // Using parameterized constructor to create Book objects
     Book book[3] = {
@@ -189,6 +215,9 @@ int main() {
     }
 
     cout << "Total Book Stores Created: " << BookStore::getTotalStores() << endl;
+
+    Magazine mag("National Geographic", 202, "National Geographic Society");
+    mag.displayDetails();
 
     return 0;
 }
