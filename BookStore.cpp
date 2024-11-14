@@ -24,7 +24,13 @@ public:
     }
 
     // Pure virtual function making this class abstract
-    virtual void displayDetails() = 0; // Must be implemented by derived classes
+    virtual void displayDetails() = 0; // Abstract display function
+};
+
+// Separate class to handle display of book details
+class BookDisplay {
+public:
+    static void display(class Book &book);
 };
 
 class Book : public Entity {
@@ -68,11 +74,9 @@ public:
         return publicationYear;
     }
 
-    // Overriding displayDetails from Entity
+    // Use BookDisplay class for displaying details
     void displayDetails() override {
-        cout << "Title: " << getName() << ", Author: " << getAuthor()
-             << ", Publication Year: " << getPublicationYear()
-             << ", Genre: " << getGenre() << endl;
+        BookDisplay::display(*this);
     }
 
     void updatePublicationYear(int newYear) {
@@ -85,7 +89,19 @@ public:
     }
 };
 
+void BookDisplay::display(Book &book) {
+    cout << "Title: " << book.getName() << ", Author: " << book.getAuthor()
+         << ", Publication Year: " << book.getPublicationYear()
+         << ", Genre: " << book.getGenre() << endl;
+}
+
 int Book::totalBooks = 0;
+
+// Separate class to handle display of bookstore details
+class BookStoreDisplay {
+public:
+    static void display(class BookStore &store);
+};
 
 class BookStore : public Entity {
 private:
@@ -122,11 +138,9 @@ public:
         return owner;
     }
 
-    // Overriding displayDetails from Entity
+    // Use BookStoreDisplay class for displaying details
     void displayDetails() override {
-        cout << "Book Store: " << getName() << ", Location: " << getLocation()
-             << ", Total Books in Stock: " << getTotalBooksInStock()
-             << ", Owner: " << getOwner() << endl;
+        BookStoreDisplay::display(*this);
     }
 
     void updateTotalBooksInStock(int newTotal) {
@@ -138,6 +152,12 @@ public:
         return totalStores;
     }
 };
+
+void BookStoreDisplay::display(BookStore &store) {
+    cout << "Book Store: " << store.getName() << ", Location: " << store.getLocation()
+         << ", Total Books in Stock: " << store.getTotalBooksInStock()
+         << ", Owner: " << store.getOwner() << endl;
+}
 
 int BookStore::totalStores = 0;
 
