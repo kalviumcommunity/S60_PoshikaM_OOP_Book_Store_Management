@@ -25,6 +25,8 @@ public:
 
     // Pure virtual function making this class abstract
     virtual void displayDetails() = 0; // Abstract display function
+
+    virtual ~Entity() {}
 };
 
 // Separate class to handle display of book details
@@ -188,36 +190,30 @@ public:
 };
 
 int main() {
-    // Using parameterized constructor to create Book objects
-    Book book[3] = {
-        Book("Ikigai", "Hector Garcia and Francesc Miralles", 2017, "Self-help"),
-        Book("Atomic Habits", "James Clear", 2018, "Self-help"),
-        Book("Rich Dad Poor Dad", "Robert T. Kiyosaki and Sharon Lechter", 1997, "Finance")
-    };
+    // Create a dynamic array of Entity pointers to hold all types of entities
+    Entity* entities[6];
 
-    // Display details of each book
-    for (int i = 0; i < 3; i++) {
-        book[i].displayDetails();
+    // Create Book objects
+    entities[0] = new Book("Ikigai", "Hector Garcia and Francesc Miralles", 2017, "Self-help");
+    entities[1] = new Book("Atomic Habits", "James Clear", 2018, "Self-help");
+    entities[2] = new Book("Rich Dad Poor Dad", "Robert T. Kiyosaki and Sharon Lechter", 1997, "Finance");
+
+    // Create BookStore objects
+    entities[3] = new BookStore("Book Haven", "456 Elm St", 5000, "Alice Johnson");
+    entities[4] = new BookStore("Readers' Corner", "789 Maple Ave", 3500, "Bob Smith");
+
+    // Create Magazine object
+    entities[5] = new Magazine("National Geographic", 202, "National Geographic Society");
+
+    // Display details of all entities
+    for (int i = 0; i < 6; i++) {
+        entities[i]->displayDetails();
     }
 
-    cout << "Total Books Created: " << Book::getTotalBooks() << endl;
-
-    // Using parameterized constructor to create BookStore objects
-    BookStore stores[3] = {
-        BookStore("Book Haven", "456 Elm St", 5000, "Alice Johnson"),
-        BookStore("Readers' Corner", "789 Maple Ave", 3500, "Bob Smith"),
-        BookStore("Page Turners", "123 Oak Blvd", 4200, "Charlie Brown")
-    };
-
-    // Display details of each bookstore
-    for (int i = 0; i < 3; i++) {
-        stores[i].displayDetails();
+    // Clean up memory
+    for (int i = 0; i < 6; i++) {
+        delete entities[i];
     }
-
-    cout << "Total Book Stores Created: " << BookStore::getTotalStores() << endl;
-
-    Magazine mag("National Geographic", 202, "National Geographic Society");
-    mag.displayDetails();
 
     return 0;
 }
